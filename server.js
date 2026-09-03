@@ -50,7 +50,13 @@ app.get('/', (req, res) => {
 });
 
 const pageRoutes = {
+  '/cars': 'cars.html',
   '/profile': 'profile.html',
+  '/login': 'login.html',
+  '/register': 'register.html',
+  '/dashboard': 'dashboard.html',
+  '/create-listing': 'create-listing.html',
+  '/premium': 'premium.html',
   '/messages': 'messages.html',
   '/favourites': 'favourites.html',
   '/alerts': 'alerts.html',
@@ -60,6 +66,10 @@ const pageRoutes = {
 
 Object.entries(pageRoutes).forEach(([route, file]) => {
   app.get(route, (req, res) => res.sendFile(path.join(__dirname, 'pages', file)));
+});
+
+app.get('/listing/:id', (req, res) => {
+  res.sendFile(path.join(__dirname, 'pages', 'listing.html'));
 });
 
 app.get('/news', async (req, res) => {
