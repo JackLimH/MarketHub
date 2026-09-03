@@ -49,6 +49,19 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+const pageRoutes = {
+  '/profile': 'profile.html',
+  '/messages': 'messages.html',
+  '/favourites': 'favourites.html',
+  '/alerts': 'alerts.html',
+  '/sell': 'sell.html',
+  '/get-app': 'get-app.html'
+};
+
+Object.entries(pageRoutes).forEach(([route, file]) => {
+  app.get(route, (req, res) => res.sendFile(path.join(__dirname, 'pages', file)));
+});
+
 app.get('/news', async (req, res) => {
   try {
     return res.json({ items: await getNews(), cachedFor: '1 hour' });

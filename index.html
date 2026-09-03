@@ -845,33 +845,33 @@
 
             <!-- Actions -->
             <div class="header-actions">
-                <a href="#" class="header-action app-link" title="Get the MarketHub app">
+                <a href="/get-app" class="header-action app-link" title="Get the MarketHub app">
                     <i class="fas fa-mobile-screen-button"></i><span>Get App</span>
                 </a>
                 <div class="header-action profile-wrap">
-                    <a href="#" id="profileButton" title="Sign up, log in, or manage premium">
+                    <a href="/profile" id="profileButton" title="Sign up, log in, or manage premium">
                         <i class="far fa-user-circle"></i><span>Profile</span>
                     </a>
                     <div class="profile-menu" id="profileMenu">
                         <h3>Your MarketHub account</h3>
                         <p>Sign in to save favourites, reply to enquiries, manage your listings, and subscribe to Premium.</p>
                         <div class="account-links">
-                            <a href="#">Log in / Sign up</a>
-                            <a href="#">Premium membership</a>
+                            <a href="/profile#login">Log in / Sign up</a>
+                            <a href="/profile#premium">Premium membership</a>
                             <a href="#">My listings: 0 / 5 this month</a>
                         </div>
                     </div>
                 </div>
-                <a href="#" class="header-action messages-link" title="Messages from customers">
+                <a href="/messages" class="header-action messages-link" title="Messages from customers">
                     <i class="far fa-comment-dots"></i><span>Messages</span><b class="notification-badge">2</b>
                 </a>
-                <a href="#" class="header-action favourites-link" title="Saved favourite listings">
+                <a href="/favourites" class="header-action favourites-link" title="Saved favourite listings">
                     <i class="far fa-heart"></i><span>Favourites</span>
                 </a>
-                <a href="#" class="header-action alerts-link" title="Listing and account alerts">
+                <a href="/alerts" class="header-action alerts-link" title="Listing and account alerts">
                     <i class="far fa-bell"></i><span>Alerts</span><b class="notification-badge">1</b>
                 </a>
-                <a href="#" class="btn-sell"><i class="fas fa-plus-circle"></i><span> Sell</span></a>
+                <a href="/sell" class="btn-sell"><i class="fas fa-plus-circle"></i><span> Sell</span></a>
             </div>
         </div>
 
@@ -1211,31 +1211,6 @@
         });
 
         // ===== SELL BUTTON ALERT =====
-        document.querySelector('.btn-sell').addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('Start selling on MarketHub!\n\nNormal members: up to 5 active items per month.\nPremium members: up to 100 active items.');
-        });
-
-        document.querySelector('.app-link').addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('MarketHub mobile apps are being prepared for a future phase. You can use the website on your phone for now.');
-        });
-
-        document.querySelector('.messages-link').addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('Messages will show customer enquiries and your conversations with buyers.');
-        });
-
-        document.querySelector('.favourites-link').addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('Sign in to save and manage your favourite listings.');
-        });
-
-        document.querySelector('.alerts-link').addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('Alerts will notify you when an item is sold or an advertisement is close to expiry.');
-        });
-
         const profileButton = document.getElementById('profileButton');
         const profileMenu = document.getElementById('profileMenu');
         profileButton.addEventListener('click', function(e) {
