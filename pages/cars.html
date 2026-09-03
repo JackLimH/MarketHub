@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cars | MarketHub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/pages/site-pages.css" />
+    <style>
+        .cars-page { max-width: 1280px; }
+        .cars-nav { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-bottom: 26px; }
+        .cars-brand { color: #e63946; font-size: 26px; font-weight: 800; }
+        .cars-brand span { color: #1a1a2e; }
+        .cars-nav-links { display: flex; gap: 14px; flex-wrap: wrap; color: #687080; font-size: 13px; font-weight: 600; }
+        .cars-nav-links a:hover { color: #e63946; }
+        .cars-hero { display: flex; align-items: end; justify-content: space-between; gap: 24px; padding: 34px; border-radius: 16px; color: #fff; background: linear-gradient(135deg, #1a1a2e, #16213e); }
+        .cars-hero h1 { max-width: 680px; }
+        .cars-hero p { color: #d9deea; }
+        .cars-search { display: flex; min-width: min(380px, 100%); padding: 5px; border-radius: 9px; background: #fff; }
+        .cars-search input { min-width: 0; flex: 1; border: 0; outline: 0; padding: 10px; font: inherit; }
+        .cars-search button { border: 0; border-radius: 6px; padding: 0 16px; color: #fff; background: #e63946; cursor: pointer; }
+        .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin: 38px 0 16px; }
+        .section-heading h2 { margin: 0; font-size: 24px; }
+        .section-heading p { margin: 0; color: #687080; font-size: 13px; }
+        .car-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+        .car-card { overflow: hidden; border: 1px solid #e3e6eb; border-radius: 12px; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
+        .car-card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0,0,0,.08); }
+        .car-image { display: grid; aspect-ratio: 16 / 10; place-items: center; color: #9aa1ad; background: #e8eaed; font-size: 40px; }
+        .car-info { padding: 14px; }
+        .car-info h3 { margin: 0; font-size: 15px; }
+        .car-price { margin-top: 8px; color: #1a1a2e; font-size: 18px; font-weight: 800; }
+        .car-meta { display: flex; justify-content: space-between; gap: 8px; margin-top: 8px; color: #7a828f; font-size: 11px; }
+        .premium-label { display: inline-flex; margin-bottom: 8px; padding: 4px 7px; border-radius: 5px; color: #8a5a00; background: #fff2c7; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
+        .brand-tags, .type-grid, .service-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+        .brand-tags a, .type-grid a, .service-grid a { padding: 13px 10px; border: 1px solid #e3e6eb; border-radius: 8px; color: #444; background: #fff; text-align: center; font-size: 13px; font-weight: 600; }
+        .brand-tags a:hover, .type-grid a:hover, .service-grid a:hover { border-color: #e63946; color: #e63946; }
+        .service-grid { grid-template-columns: repeat(4, 1fr); }
+        .service-grid a { display: flex; align-items: center; gap: 8px; text-align: left; }
+        .service-grid i { color: #e63946; }
+        .cars-footer { margin-top: 46px; padding-top: 22px; border-top: 1px solid #e3e6eb; color: #7a828f; font-size: 12px; }
+        @media (max-width: 900px) { .cars-hero { display: block; } .cars-search { margin-top: 22px; } .car-grid { grid-template-columns: repeat(2, 1fr); } .brand-tags, .type-grid { grid-template-columns: repeat(3, 1fr); } .service-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 560px) { .cars-nav { align-items: start; flex-direction: column; } .cars-hero { padding: 24px; } .car-grid { grid-template-columns: 1fr 1fr; gap: 10px; } .brand-tags, .type-grid, .service-grid { grid-template-columns: repeat(2, 1fr); } .section-heading { display: block; } .section-heading p { margin-top: 6px; } }
+    </style>
+</head>
+<body>
+<main class="page-shell cars-page">
+    <nav class="cars-nav">
+        <a class="cars-brand" href="/">Market<span>Hub</span></a>
+        <div class="cars-nav-links"><a href="/">All marketplace</a><a href="/sell">Sell a car</a><a href="/favourites">Favourites</a><a href="/messages">Messages</a></div>
+    </nav>
+
+    <section class="cars-hero">
+        <div><span class="eyebrow">Cars marketplace</span><h1>Find your next car in Malaysia.</h1><p class="lede">Browse verified-style mock listings, compare brands, and connect with sellers.</p></div>
+        <form class="cars-search" onsubmit="event.preventDefault(); alert('Car search will be connected to live filters in the next phase.');"><input aria-label="Search cars" placeholder="Search Toyota, SUV, Kuala Lumpur..." /><button type="submit"><i class="fas fa-search"></i></button></form>
+    </section>
+
+    <section aria-labelledby="trending-title">
+        <div class="section-heading"><div><h2 id="trending-title">Trending Now</h2><p>Premium member ads receive priority placement here.</p></div><a class="link" href="/premium">Promote with Premium →</a></div>
+        <div class="car-grid">
+            <a class="car-card" href="/listing/toyota-camry"><div class="car-image"><i class="fas fa-car"></i></div><div class="car-info"><span class="premium-label">Premium ad</span><h3>Toyota Camry 2.5V</h3><div class="car-price">RM 138,800</div><div class="car-meta"><span>2022 · 32,000 km</span><span>Kuala Lumpur</span></div></div></a>
+            <a class="car-card" href="/listing/bmw-x5"><div class="car-image"><i class="fas fa-car-side"></i></div><div class="car-info"><span class="premium-label">Premium ad</span><h3>BMW X5 xDrive40i</h3><div class="car-price">RM 398,000</div><div class="car-meta"><span>2021 · 41,000 km</span><span>Selangor</span></div></div></a>
+            <a class="car-card" href="/listing/mercedes-c-class"><div class="car-image"><i class="fas fa-car"></i></div><div class="car-info"><span class="premium-label">Premium ad</span><h3>Mercedes-Benz C200</h3><div class="car-price">RM 245,000</div><div class="car-meta"><span>2023 · 18,000 km</span><span>Penang</span></div></div></a>
+            <a class="car-card" href="/listing/volvo-xc60"><div class="car-image"><i class="fas fa-car-side"></i></div><div class="car-info"><span class="premium-label">Premium ad</span><h3>Volvo XC60 Recharge</h3><div class="car-price">RM 288,800</div><div class="car-meta"><span>2022 · 26,000 km</span><span>Johor Bahru</span></div></div></a>
+        </div>
+    </section>
+
+    <section aria-labelledby="brands-title"><div class="section-heading"><div><h2 id="brands-title">Popular Car Brands</h2><p>Search the brands Malaysians are looking for.</p></div></div><div class="brand-tags"><a href="#cars-for-sale">Toyota</a><a href="#cars-for-sale">Perodua</a><a href="#cars-for-sale">Mercedes-Benz</a><a href="#cars-for-sale">BMW</a><a href="#cars-for-sale">Volvo</a><a href="#cars-for-sale">Audi</a><a href="#cars-for-sale">Honda</a><a href="#cars-for-sale">Proton</a><a href="#cars-for-sale">Nissan</a><a href="#cars-for-sale">Mazda</a><a href="#cars-for-sale">Lexus</a><a href="#cars-for-sale">Porsche</a></div></section>
+
+    <section aria-labelledby="types-title"><div class="section-heading"><div><h2 id="types-title">Browse Car Types</h2><p>Choose a body style that fits your next journey.</p></div></div><div class="type-grid"><a href="#cars-for-sale">SUV</a><a href="#cars-for-sale">Sedan</a><a href="#cars-for-sale">MPV</a><a href="#cars-for-sale">Luxury</a><a href="#cars-for-sale">Sports</a><a href="#cars-for-sale">Hatchback</a><a href="#cars-for-sale">Pickup Truck</a><a href="#cars-for-sale">Convertible</a><a href="#cars-for-sale">Electric</a><a href="#cars-for-sale">Hybrid</a><a href="#cars-for-sale">4x4</a><a href="#cars-for-sale">Van</a></div></section>
+
+    <section id="cars-for-sale" aria-labelledby="sale-title"><div class="section-heading"><div><h2 id="sale-title">Cars for Sale</h2><p>Latest mock inventory from private sellers and dealers.</p></div><a class="link" href="/sell">List your car →</a></div><div class="car-grid"><a class="car-card" href="/listing/perodua-myvi"><div class="car-image"><i class="fas fa-car"></i></div><div class="car-info"><h3>Perodua Myvi 1.5 AV</h3><div class="car-price">RM 58,800</div><div class="car-meta"><span>2021 · 45,000 km</span><span>Shah Alam</span></div></div></a><a class="car-card" href="/listing/honda-city"><div class="car-image"><i class="fas fa-car-side"></i></div><div class="car-info"><h3>Honda City V-Sensing</h3><div class="car-price">RM 79,900</div><div class="car-meta"><span>2022 · 29,000 km</span><span>Ipoh</span></div></div></a><a class="car-card" href="/listing/proton-x50"><div class="car-image"><i class="fas fa-car"></i></div><div class="car-info"><h3>Proton X50 Flagship</h3><div class="car-price">RM 91,800</div><div class="car-meta"><span>2023 · 21,000 km</span><span>Melaka</span></div></div></a><a class="car-card" href="/listing/audi-a4"><div class="car-image"><i class="fas fa-car-side"></i></div><div class="car-info"><h3>Audi A4 S line</h3><div class="car-price">RM 158,000</div><div class="car-meta"><span>2020 · 38,000 km</span><span>Petaling Jaya</span></div></div></a><a class="car-card" href="/listing/mazda-cx5"><div class="car-image"><i class="fas fa-car"></i></div><div class="car-info"><h3>Mazda CX-5 High</h3><div class="car-price">RM 116,800</div><div class="car-meta"><span>2022 · 34,000 km</span><span>Seremban</span></div></div></a><a class="car-card" href="/listing/nissan-almera"><div class="car-image"><i class="fas fa-car-side"></i></div><div class="car-info"><h3>Nissan Almera VLT</h3><div class="car-price">RM 73,500</div><div class="car-meta"><span>2022 · 31,000 km</span><span>Kota Kinabalu</span></div></div></a><a class="car-card" href="/listing/lexus-es"><div class="car-image"><i class="fas fa-car"></i></div><div class="car-info"><h3>Lexus ES250 Premium</h3><div class="car-price">RM 228,000</div><div class="car-meta"><span>2021 · 27,000 km</span><span>Kuala Lumpur</span></div></div></a><a class="car-card" href="/listing/porsche-718"><div class="car-image"><i class="fas fa-car-side"></i></div><div class="car-info"><h3>Porsche 718 Cayman</h3><div class="car-price">RM 420,000</div><div class="car-meta"><span>2020 · 16,000 km</span><span>Selangor</span></div></div></a></div></section>
+
+    <section aria-labelledby="more-title"><div class="section-heading"><div><h2 id="more-title">More Automotive Categories</h2><p>Everything around the car ownership journey.</p></div></div><div class="service-grid"><a href="#"><i class="fas fa-truck"></i> Commercial Vehicles</a><a href="#"><i class="fas fa-tractor"></i> Heavy-Duty Machinery</a><a href="#"><i class="fas fa-ship"></i> Boats / Yachts</a><a href="#"><i class="fas fa-gears"></i> Auto Parts</a><a href="#"><i class="fas fa-screwdriver-wrench"></i> Car Accessories</a><a href="#"><i class="fas fa-bolt"></i> Car Electronics</a><a href="#"><i class="fas fa-wrench"></i> Auto Services</a><a href="/sell"><i class="fas fa-plus"></i> Sell in another category</a></div></section>
+
+    <footer class="cars-footer"><a class="link" href="/">← Return to the full MarketHub marketplace</a><p>MarketHub Cars is a mock category experience. Listing data, filters, payments, and seller verification will connect to backend services in the next phase.</p></footer>
+</main>
+</body>
+</html>

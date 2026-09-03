@@ -50,6 +50,7 @@ app.get('/', (req, res) => {
 });
 
 const pageRoutes = {
+  '/cars': 'cars.html',
   '/profile': 'profile.html',
   '/login': 'login.html',
   '/register': 'register.html',
