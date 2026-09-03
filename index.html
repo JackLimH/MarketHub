@@ -33,33 +33,39 @@
             padding: 0 20px;
         }
 
+        .main-layout {
+            display: grid;
+            grid-template-columns: 450px minmax(0, 1fr) 450px;
+            gap: 20px;
+            max-width: 1880px;
+        }
+
         .ad-rail {
-            position: fixed;
-            top: 180px;
-            width: 150px;
+            display: grid;
+            align-content: start;
+            gap: 14px;
+            padding-top: 28px;
+        }
+
+        .ad-slot {
             min-height: 280px;
             padding: 14px 10px;
             border: 1px dashed #c9ced6;
-            background: rgba(255, 255, 255, 0.78);
+            background: #fff;
             color: #8a929f;
             font-size: 11px;
             text-align: center;
-            z-index: 5;
         }
 
-        .ad-rail.left {
-            left: max(12px, calc((100vw - 1580px) / 2));
-        }
-
-        .ad-rail.right {
-            right: max(12px, calc((100vw - 1580px) / 2));
-        }
-
-        .ad-rail strong {
+        .ad-slot strong {
             display: block;
             margin-bottom: 8px;
             color: #687080;
             font-size: 12px;
+        }
+
+        .main-content {
+            min-width: 0;
         }
 
         .news-section {
@@ -720,6 +726,10 @@
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
+            .main-layout {
+                display: block;
+            }
+
             .ad-rail {
                 display: none;
             }
@@ -819,15 +829,6 @@
 </head>
 <body>
 
-    <aside class="ad-rail left" aria-label="Advertisement placement">
-        <strong>Advertisement</strong>
-        Google AdSense slot<br />ready for publisher approval
-    </aside>
-    <aside class="ad-rail right" aria-label="Advertisement placement">
-        <strong>Advertisement</strong>
-        Google AdSense slot<br />ready for publisher approval
-    </aside>
-
     <!-- ========== HEADER ========== -->
     <header>
         <div class="container header-top">
@@ -892,7 +893,14 @@
     </header>
 
     <!-- ========== MAIN ========== -->
-    <main class="container">
+    <main class="main-layout container">
+        <aside class="ad-rail left" aria-label="Left advertisement placements">
+            <div class="ad-slot"><strong>Advertisement 1</strong>Google AdSense slot<br />ready for publisher approval</div>
+            <div class="ad-slot"><strong>Advertisement 2</strong>Google AdSense slot<br />ready for publisher approval</div>
+            <div class="ad-slot"><strong>Advertisement 3</strong>Google AdSense slot<br />ready for publisher approval</div>
+        </aside>
+
+        <div class="main-content">
 
         <!-- Hero Banner -->
         <section class="hero">
@@ -1006,6 +1014,13 @@
             <!-- Injected by JS -->
         </div>
 
+        </div>
+
+        <aside class="ad-rail right" aria-label="Right advertisement placements">
+            <div class="ad-slot"><strong>Advertisement 4</strong>Google AdSense slot<br />ready for publisher approval</div>
+            <div class="ad-slot"><strong>Advertisement 5</strong>Google AdSense slot<br />ready for publisher approval</div>
+            <div class="ad-slot"><strong>Advertisement 6</strong>Google AdSense slot<br />ready for publisher approval</div>
+        </aside>
     </main>
 
     <!-- ========== CHATBOT ========== -->
