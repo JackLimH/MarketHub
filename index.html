@@ -858,7 +858,7 @@
                         <div class="account-links">
                             <a href="/profile#login">Log in / Sign up</a>
                             <a href="/profile#premium">Premium membership</a>
-                            <a href="#">My listings: 0 / 5 this month</a>
+                            <a href="/dashboard">My listings: 0 / 5 this month</a>
                         </div>
                     </div>
                 </div>
@@ -908,7 +908,7 @@
                 <h1>Malaysia's Largest Marketplace</h1>
                 <p>Buy, sell, or find almost anything — it's easy!</p>
             </div>
-            <a href="#" class="btn-hero"><i class="fas fa-plus-circle"></i> Start Selling</a>
+            <a href="/sell" class="btn-hero"><i class="fas fa-plus-circle"></i> Start Selling</a>
         </section>
 
         <section class="news-section" aria-labelledby="news-title">
@@ -1146,7 +1146,7 @@
                 }
 
                 return `
-                            <div class="product-card">
+                                <a href="/listing/${encodeURIComponent(p.title)}" class="product-card">
                                 <div class="img-placeholder">
                                     <i class="fas ${p.icon || 'fa-box'}"></i>
                                 </div>
@@ -1157,7 +1157,7 @@
                                         ${metaHtml}
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         `;
             }).join('');
         }
