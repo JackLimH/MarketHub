@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{TITLE}} | MarketHub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/pages/site-pages.css" />
+    <style>
+        .category-page { max-width: 1280px; }
+        .category-nav { display:flex; align-items:center; justify-content:space-between; gap:18px; margin-bottom:26px; }
+        .category-brand { color:#e63946; font-size:26px; font-weight:800; }
+        .category-brand span { color:#1a1a2e; }
+        .category-nav-links { display:flex; gap:14px; flex-wrap:wrap; color:#687080; font-size:13px; font-weight:600; }
+        .category-nav-links a:hover, .link:hover { color:#e63946; }
+        .category-hero { display:flex; align-items:end; justify-content:space-between; gap:24px; padding:34px; border-radius:16px; color:#fff; background:linear-gradient(135deg,#1a1a2e,#16213e); }
+        .category-hero h1 { max-width:700px; }
+        .category-hero p { color:#d9deea; }
+        .category-search { display:flex; min-width:min(380px,100%); padding:5px; border-radius:9px; background:#fff; }
+        .category-search input { min-width:0; flex:1; border:0; outline:0; padding:10px; font:inherit; }
+        .category-search button { border:0; border-radius:6px; padding:0 16px; color:#fff; background:#e63946; cursor:pointer; }
+        .section-heading { display:flex; align-items:end; justify-content:space-between; gap:16px; margin:38px 0 16px; }
+        .section-heading h2 { margin:0; font-size:24px; }
+        .section-heading p { margin:0; color:#687080; font-size:13px; }
+        .category-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:10px; }
+        .category-grid a { padding:13px 10px; border:1px solid #e3e6eb; border-radius:8px; color:#444; background:#fff; text-align:center; font-size:13px; font-weight:600; }
+        .category-grid a:hover { border-color:#e63946; color:#e63946; }
+        .listing-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; }
+        .listing-card { overflow:hidden; border:1px solid #e3e6eb; border-radius:12px; background:#fff; box-shadow:0 2px 8px rgba(0,0,0,.04); }
+        .listing-card:hover { transform:translateY(-3px); box-shadow:0 12px 28px rgba(0,0,0,.08); }
+        .listing-image { display:grid; aspect-ratio:16/10; place-items:center; color:#9aa1ad; background:#e8eaed; font-size:40px; }
+        .listing-info { padding:14px; }
+        .listing-info h3 { margin:0; font-size:15px; }
+        .listing-price { margin-top:8px; color:#1a1a2e; font-size:18px; font-weight:800; }
+        .listing-meta { display:flex; justify-content:space-between; gap:8px; margin-top:8px; color:#7a828f; font-size:11px; }
+        .premium-label { display:inline-flex; margin-bottom:8px; padding:4px 7px; border-radius:5px; color:#8a5a00; background:#fff2c7; font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; }
+        .category-footer { margin-top:46px; padding-top:22px; border-top:1px solid #e3e6eb; color:#7a828f; font-size:12px; }
+        @media (max-width:900px) { .category-hero { display:block; } .category-search { margin-top:22px; } .listing-grid { grid-template-columns:repeat(2,1fr); } .category-grid { grid-template-columns:repeat(3,1fr); } }
+        @media (max-width:560px) { .category-nav { align-items:start; flex-direction:column; } .category-hero { padding:24px; } .section-heading { display:block; } .section-heading p { margin-top:6px; } .category-grid { grid-template-columns:repeat(2,1fr); } .listing-grid { gap:10px; } }
+    </style>
+</head>
+<body>
+<main class="page-shell category-page">
+    <nav class="category-nav">
+        <a class="category-brand" href="/">Market<span>Hub</span></a>
+        <div class="category-nav-links"><a href="/">All marketplace</a><a href="/cars">Cars</a><a href="/sell">Sell an item</a><a href="/favourites">Favourites</a></div>
+    </nav>
+    <section class="category-hero">
+        <div><span class="eyebrow">{{EYEBROW}}</span><h1>{{HEADING}}</h1><p class="lede">{{DESCRIPTION}}</p></div>
+        <form class="category-search" onsubmit="event.preventDefault(); alert('Search filters for {{TITLE}} will be connected in the next phase.');"><input aria-label="Search {{TITLE}}" placeholder="Search {{SEARCH_PLACEHOLDER}}..." /><button type="submit"><i class="fas fa-search"></i></button></form>
+    </section>
+    <section aria-labelledby="trending-title"><div class="section-heading"><div><h2 id="trending-title">Trending Now</h2><p>Premium member ads receive priority placement here.</p></div><a class="link" href="/premium">Promote with Premium →</a></div><div class="listing-grid">{{TRENDING}}</div></section>
+    <section aria-labelledby="popular-title"><div class="section-heading"><div><h2 id="popular-title">Popular Searches</h2><p>Start with what other MarketHub users are browsing.</p></div></div><div class="category-grid">{{POPULAR}}</div></section>
+    <section aria-labelledby="types-title"><div class="section-heading"><div><h2 id="types-title">Browse {{TYPE_LABEL}}</h2><p>Filter your search by the kind of item you need.</p></div></div><div class="category-grid">{{TYPES}}</div></section>
+    <section id="category-listings" aria-labelledby="sale-title"><div class="section-heading"><div><h2 id="sale-title">{{LISTING_TITLE}}</h2><p>Latest mock inventory from sellers and businesses.</p></div><a class="link" href="/sell">List yours →</a></div><div class="listing-grid">{{LISTINGS}}</div></section>
+    <section aria-labelledby="more-title"><div class="section-heading"><div><h2 id="more-title">More {{TITLE}} Categories</h2><p>Explore the wider {{TITLE}} marketplace.</p></div></div><div class="category-grid">{{MORE}}</div></section>
+    <footer class="category-footer"><a class="link" href="/">← Return to the full MarketHub marketplace</a><p>{{TITLE}} is a mock category experience. Live filters, inventory, payments, and seller verification will connect to backend services in the next phase.</p></footer>
+</main>
+</body>
+</html>
