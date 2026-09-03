@@ -33,6 +33,98 @@
             padding: 0 20px;
         }
 
+        .ad-rail {
+            position: fixed;
+            top: 180px;
+            width: 150px;
+            min-height: 280px;
+            padding: 14px 10px;
+            border: 1px dashed #c9ced6;
+            background: rgba(255, 255, 255, 0.78);
+            color: #8a929f;
+            font-size: 11px;
+            text-align: center;
+            z-index: 5;
+        }
+
+        .ad-rail.left {
+            left: max(12px, calc((100vw - 1580px) / 2));
+        }
+
+        .ad-rail.right {
+            right: max(12px, calc((100vw - 1580px) / 2));
+        }
+
+        .ad-rail strong {
+            display: block;
+            margin-bottom: 8px;
+            color: #687080;
+            font-size: 12px;
+        }
+
+        .news-section {
+            margin-top: 42px;
+            padding: 24px;
+            border: 1px solid #e3e6eb;
+            border-radius: 14px;
+            background: #fff;
+        }
+
+        .news-section-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .news-section-header h2 {
+            font-size: 22px;
+        }
+
+        .news-section-header p {
+            color: #7a828f;
+            font-size: 12px;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .news-card {
+            padding: 16px;
+            border: 1px solid #edf0f2;
+            border-radius: 10px;
+            background: #f9fafb;
+        }
+
+        .news-card h3 {
+            font-size: 15px;
+            line-height: 1.35;
+        }
+
+        .news-card p {
+            margin-top: 8px;
+            color: #687080;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .news-card a {
+            display: inline-block;
+            margin-top: 12px;
+            color: #e63946;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .news-empty {
+            color: #687080;
+            font-size: 13px;
+        }
+
         /* ===== HEADER ===== */
         header {
             background: #ffffff;
@@ -628,6 +720,10 @@
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
+            .ad-rail {
+                display: none;
+            }
+
             .header-top {
                 flex-direction: column;
                 align-items: stretch;
@@ -702,10 +798,35 @@
             .section-title h2 {
                 font-size: 18px;
             }
+
+            .news-section {
+                padding: 18px;
+            }
+
+            .news-section-header {
+                display: block;
+            }
+
+            .news-section-header p {
+                margin-top: 6px;
+            }
+
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
+
+    <aside class="ad-rail left" aria-label="Advertisement placement">
+        <strong>Advertisement</strong>
+        Google AdSense slot<br />ready for publisher approval
+    </aside>
+    <aside class="ad-rail right" aria-label="Advertisement placement">
+        <strong>Advertisement</strong>
+        Google AdSense slot<br />ready for publisher approval
+    </aside>
 
     <!-- ========== HEADER ========== -->
     <header>
@@ -780,6 +901,16 @@
                 <p>Buy, sell, or find almost anything — it's easy!</p>
             </div>
             <a href="#" class="btn-hero"><i class="fas fa-plus-circle"></i> Start Selling</a>
+        </section>
+
+        <section class="news-section" aria-labelledby="news-title">
+            <div class="news-section-header">
+                <h2 id="news-title">Market News</h2>
+                <p>Short feed excerpts with links to the original publisher. Refreshed hourly.</p>
+            </div>
+            <div class="news-grid" id="newsGrid">
+                <p class="news-empty">Loading the latest market headlines...</p>
+            </div>
         </section>
 
         <!-- Trending Now -->
@@ -1020,6 +1151,38 @@
         renderProducts('trendingGrid', trendingProducts, 'default');
         renderProducts('propertyGrid', propertyProducts, 'property');
         renderProducts('electronicsGrid', electronicsProducts, 'electronics');
+
+        function escapeHtml(value) {
+            return String(value || '').replace(/[&<>'"]/g, character => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                "'": '&#39;',
+                '"': '&quot;'
+            }[character]));
+        }
+
+        async function loadNews() {
+            const newsGrid = document.getElementById('newsGrid');
+            try {
+                const response = await fetch('/news');
+                if (!response.ok) throw new Error('News feed unavailable');
+                const data = await response.json();
+                if (!data.items?.length) throw new Error('No news available');
+
+                newsGrid.innerHTML = data.items.map(item => `
+                    <article class="news-card">
+                        <h3>${escapeHtml(item.title)}</h3>
+                        ${item.excerpt ? `<p>${escapeHtml(item.excerpt)}</p>` : ''}
+                        <a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">Read at original publisher <i class="fas fa-arrow-up-right-from-square"></i></a>
+                    </article>
+                `).join('');
+            } catch (error) {
+                newsGrid.innerHTML = '<p class="news-empty">Market news is temporarily unavailable. Please check back later.</p>';
+            }
+        }
+
+        loadNews();
 
         // ===== SIMPLE SEARCH ALERT =====
         document.querySelector('.search-bar button').addEventListener('click', function(e) {
