@@ -45,7 +45,7 @@
         .header-top {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: flex-start;
             padding: 14px 0;
             flex-wrap: wrap;
             gap: 12px;
@@ -70,6 +70,7 @@
         .search-bar {
             flex: 1;
             max-width: 520px;
+            margin-left: clamp(10px, 3vw, 44px);
             display: flex;
             background: #f0f1f3;
             border-radius: 40px;
@@ -110,9 +111,10 @@
         .header-actions {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 16px;
             font-size: 14px;
             font-weight: 500;
+            margin-left: auto;
         }
 
         .header-actions a {
@@ -121,6 +123,7 @@
             gap: 6px;
             color: #555;
             transition: color 0.2s;
+            white-space: nowrap;
         }
 
         .header-actions a:hover {
@@ -139,6 +142,84 @@
         .btn-sell:hover {
             background: #c62835 !important;
             color: #fff !important;
+        }
+
+        .header-action {
+            position: relative;
+        }
+
+        .header-action i {
+            color: #687080;
+            font-size: 16px;
+        }
+
+        .header-action:hover i {
+            color: #e63946;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -9px;
+            left: 10px;
+            min-width: 16px;
+            padding: 2px 4px;
+            border-radius: 10px;
+            background: #e63946;
+            color: #fff;
+            font-size: 10px;
+            line-height: 1.1;
+            text-align: center;
+        }
+
+        .profile-menu {
+            position: absolute;
+            top: calc(100% + 16px);
+            right: 0;
+            width: 280px;
+            padding: 18px;
+            border: 1px solid #e7e9ed;
+            border-radius: 14px;
+            background: #fff;
+            box-shadow: 0 16px 34px rgba(26, 26, 46, 0.16);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-6px);
+            transition: opacity 0.2s, transform 0.2s;
+            z-index: 150;
+        }
+
+        .profile-menu.open {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .profile-menu h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .profile-menu p {
+            color: #687080;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .profile-menu .account-links {
+            display: grid;
+            gap: 8px;
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid #edf0f2;
+        }
+
+        .profile-menu .account-links a {
+            padding: 8px 0;
+            color: #444;
+        }
+
+        .profile-menu .account-links a:hover {
+            color: #e63946;
         }
 
         /* ===== CATEGORY NAV ===== */
@@ -554,11 +635,27 @@
 
             .search-bar {
                 max-width: 100%;
+                margin-left: 0;
             }
 
             .header-actions {
                 justify-content: space-between;
                 flex-wrap: wrap;
+                margin-left: 0;
+                gap: 12px;
+            }
+
+            .header-action span:not(.notification-badge) {
+                display: none;
+            }
+
+            .header-actions .btn-sell span {
+                display: inline;
+            }
+
+            .profile-menu {
+                left: 0;
+                right: auto;
             }
 
             .hero {
@@ -626,9 +723,33 @@
 
             <!-- Actions -->
             <div class="header-actions">
-                <a href="#"><i class="far fa-heart"></i> Favourites</a>
-                <a href="#"><i class="far fa-bell"></i> Alerts</a>
-                <a href="#" class="btn-sell"><i class="fas fa-plus-circle"></i> Sell</a>
+                <a href="#" class="header-action app-link" title="Get the MarketHub app">
+                    <i class="fas fa-mobile-screen-button"></i><span>Get App</span>
+                </a>
+                <div class="header-action profile-wrap">
+                    <a href="#" id="profileButton" title="Sign up, log in, or manage premium">
+                        <i class="far fa-user-circle"></i><span>Profile</span>
+                    </a>
+                    <div class="profile-menu" id="profileMenu">
+                        <h3>Your MarketHub account</h3>
+                        <p>Sign in to save favourites, reply to enquiries, manage your listings, and subscribe to Premium.</p>
+                        <div class="account-links">
+                            <a href="#">Log in / Sign up</a>
+                            <a href="#">Premium membership</a>
+                            <a href="#">My listings: 0 / 5 this month</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="header-action messages-link" title="Messages from customers">
+                    <i class="far fa-comment-dots"></i><span>Messages</span><b class="notification-badge">2</b>
+                </a>
+                <a href="#" class="header-action favourites-link" title="Saved favourite listings">
+                    <i class="far fa-heart"></i><span>Favourites</span>
+                </a>
+                <a href="#" class="header-action alerts-link" title="Listing and account alerts">
+                    <i class="far fa-bell"></i><span>Alerts</span><b class="notification-badge">1</b>
+                </a>
+                <a href="#" class="btn-sell"><i class="fas fa-plus-circle"></i><span> Sell</span></a>
             </div>
         </div>
 
@@ -914,7 +1035,38 @@
         // ===== SELL BUTTON ALERT =====
         document.querySelector('.btn-sell').addEventListener('click', function(e) {
             e.preventDefault();
-            alert('🚀 Start selling on MarketHub!\n(Clicking this would open the listing form.)');
+            alert('Start selling on MarketHub!\n\nNormal members: up to 5 active items per month.\nPremium members: up to 100 active items.');
+        });
+
+        document.querySelector('.app-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('MarketHub mobile apps are being prepared for a future phase. You can use the website on your phone for now.');
+        });
+
+        document.querySelector('.messages-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Messages will show customer enquiries and your conversations with buyers.');
+        });
+
+        document.querySelector('.favourites-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Sign in to save and manage your favourite listings.');
+        });
+
+        document.querySelector('.alerts-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Alerts will notify you when an item is sold or an advertisement is close to expiry.');
+        });
+
+        const profileButton = document.getElementById('profileButton');
+        const profileMenu = document.getElementById('profileMenu');
+        profileButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            profileMenu.classList.toggle('open');
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.profile-wrap')) profileMenu.classList.remove('open');
         });
 
         // ===== CHATBOT LOGIC =====
