@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MarketHub - Malaysia's Marketplace</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f6f8;
+            color: #1a1a2e;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            background: #ffffff;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 0;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 26px;
+            font-weight: 800;
+            color: #e63946;
+        }
+
+        .logo i {
+            font-size: 28px;
+        }
+        .logo span {
+            color: #1a1a2e;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 520px;
+            display: flex;
+            background: #f0f1f3;
+            border-radius: 40px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            transition: border 0.2s;
+        }
+
+        .search-bar:focus-within {
+            border-color: #e63946;
+            background: #fff;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            background: transparent;
+            font-size: 15px;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .search-bar button {
+            background: #e63946;
+            border: none;
+            color: #fff;
+            padding: 0 24px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .search-bar button:hover {
+            background: #c62835;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .header-actions a {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #555;
+            transition: color 0.2s;
+        }
+
+        .header-actions a:hover {
+            color: #e63946;
+        }
+
+        .btn-sell {
+            background: #e63946;
+            color: #fff !important;
+            padding: 10px 22px;
+            border-radius: 40px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .btn-sell:hover {
+            background: #c62835 !important;
+            color: #fff !important;
+        }
+
+        /* ===== CATEGORY NAV ===== */
+        .category-nav {
+            background: #fff;
+            border-top: 1px solid #eee;
+            padding: 10px 0;
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .category-nav .container {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+
+        .category-nav a {
+            font-size: 14px;
+            font-weight: 500;
+            color: #444;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.2s;
+            padding: 4px 0;
+        }
+
+        .category-nav a:hover {
+            color: #e63946;
+        }
+
+        .category-nav a i {
+            font-size: 16px;
+            color: #777;
+        }
+
+        /* ===== HERO BANNER ===== */
+        .hero {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #fff;
+            border-radius: 20px;
+            padding: 48px 40px;
+            margin: 28px 0 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .hero h1 {
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            margin-top: 8px;
+            opacity: 0.8;
+            font-size: 16px;
+        }
+
+        .hero .btn-hero {
+            background: #e63946;
+            color: #fff;
+            padding: 14px 36px;
+            border-radius: 40px;
+            font-weight: 600;
+            display: inline-block;
+            transition: background 0.2s;
+        }
+
+        .hero .btn-hero:hover {
+            background: #c62835;
+        }
+
+        /* ===== SECTION TITLE ===== */
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 36px 0 18px;
+        }
+
+        .section-title h2 {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .section-title a {
+            color: #e63946;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .section-title a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== PRODUCT GRID ===== */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 18px;
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+        }
+
+        .product-card .img-placeholder {
+            width: 100%;
+            aspect-ratio: 16/10;
+            background: #e8eaed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 32px;
+        }
+
+        .product-card .info {
+            padding: 14px 16px 16px;
+        }
+
+        .product-card .price {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+
+        .product-card .title {
+            font-size: 14px;
+            color: #333;
+            margin: 4px 0 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .product-card .meta {
+            font-size: 12px;
+            color: #888;
+            display: flex;
+            gap: 12px;
+        }
+
+        .product-card .meta i {
+            margin-right: 4px;
+        }
+
+        /* ===== POPULAR SEARCHES ===== */
+        .popular-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 12px 0 30px;
+        }
+
+        .popular-tags a {
+            background: #fff;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #444;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .popular-tags a:hover {
+            background: #e63946;
+            color: #fff;
+        }
+
+        /* ===== CATEGORY SECTIONS ===== */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 14px;
+            margin-bottom: 30px;
+        }
+
+        .category-item {
+            background: #fff;
+            border-radius: 12px;
+            padding: 18px 12px;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+
+        .category-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .category-item i {
+            font-size: 28px;
+            color: #e63946;
+            margin-bottom: 8px;
+        }
+
+        .category-item span {
+            font-size: 13px;
+            font-weight: 500;
+            display: block;
+        }
+
+        .category-item small {
+            font-size: 11px;
+            color: #999;
+        }
+
+        /* ===== CHATBOT ===== */
+        .chat-toggle {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            width: 62px;
+            height: 62px;
+            border: none;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e63946, #c62835);
+            color: #fff;
+            font-size: 24px;
+            box-shadow: 0 12px 26px rgba(230, 57, 70, 0.35);
+            cursor: pointer;
+            z-index: 1200;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .chat-toggle:hover {
+            transform: translateY(-2px);
+        }
+
+        .chat-widget {
+            position: fixed;
+            right: 24px;
+            bottom: 96px;
+            width: min(360px, calc(100vw - 24px));
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 18px 40px rgba(17, 24, 39, 0.18);
+            border: 1px solid rgba(17, 24, 39, 0.08);
+            overflow: hidden;
+            z-index: 1200;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+
+        .chat-widget.hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(18px) scale(0.98);
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #fff;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 600;
+        }
+
+        .chat-header-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chat-header button {
+            border: none;
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .chat-body {
+            max-height: 360px;
+            overflow-y: auto;
+            padding: 16px;
+            background: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .message {
+            max-width: 84%;
+            padding: 10px 12px;
+            border-radius: 14px;
+            line-height: 1.45;
+            font-size: 14px;
+            word-wrap: break-word;
+        }
+
+        .message.bot {
+            align-self: flex-start;
+            background: #fff;
+            border: 1px solid #edf0f2;
+            color: #1f2937;
+        }
+
+        .message.user {
+            align-self: flex-end;
+            background: #e63946;
+            color: #fff;
+        }
+
+        .chat-input-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-top: 1px solid #edf0f2;
+            padding: 12px 12px 14px;
+            background: #fff;
+        }
+
+        .chat-input-row input {
+            flex: 1;
+            border: 1px solid #e5e7eb;
+            background: #f9fafb;
+            border-radius: 999px;
+            padding: 12px 14px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .chat-input-row input:focus {
+            border-color: #e63946;
+            background: #fff;
+        }
+
+        .chat-input-row button {
+            border: none;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #e63946;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #1a1a2e;
+            color: #ccc;
+            padding: 48px 0 24px;
+            margin-top: 48px;
+        }
+
+        footer .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+
+        footer h4 {
+            color: #fff;
+            font-size: 16px;
+            margin-bottom: 14px;
+        }
+
+        footer ul {
+            list-style: none;
+        }
+
+        footer ul li {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        footer ul li a:hover {
+            color: #fff;
+        }
+
+        footer .copyright {
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 13px;
+            color: #777;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-bar {
+                max-width: 100%;
+            }
+
+            .header-actions {
+                justify-content: space-between;
+                flex-wrap: wrap;
+            }
+
+            .hero {
+                padding: 28px 20px;
+                text-align: center;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 24px;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+
+            .category-nav .container {
+                gap: 16px;
+            }
+
+            .category-nav a {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .product-card .info {
+                padding: 10px 10px 12px;
+            }
+
+            .product-card .price {
+                font-size: 15px;
+            }
+
+            .product-card .title {
+                font-size: 12px;
+            }
+
+            .section-title h2 {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== HEADER ========== -->
+    <header>
+        <div class="container header-top">
+            <!-- Logo -->
+            <a href="#" class="logo">
+                <i class="fas fa-store"></i> Market<span>Hub</span>
+            </a>
+
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <input type="text" placeholder="Search for cars, properties, jobs..." />
+                <button><i class="fas fa-search"></i></button>
+            </div>
+
+            <!-- Actions -->
+            <div class="header-actions">
+                <a href="#"><i class="far fa-heart"></i> Favourites</a>
+                <a href="#"><i class="far fa-bell"></i> Alerts</a>
+                <a href="#" class="btn-sell"><i class="fas fa-plus-circle"></i> Sell</a>
+            </div>
+        </div>
+
+        <!-- Category Navigation -->
+        <div class="category-nav">
+            <div class="container">
+                <a href="#"><i class="fas fa-car"></i> Cars</a>
+                <a href="#"><i class="fas fa-home"></i> Houses for Sale</a>
+                <a href="#"><i class="fas fa-building"></i> Apt for Rent</a>
+                <a href="#"><i class="fas fa-motorcycle"></i> Motorcycles</a>
+                <a href="#"><i class="fas fa-mobile-alt"></i> Mobile Phones</a>
+                <a href="#"><i class="fas fa-paw"></i> Pets</a>
+                <a href="#"><i class="fas fa-briefcase"></i> Jobs</a>
+                <a href="#"><i class="fas fa-tshirt"></i> Fashion</a>
+                <a href="#"><i class="fas fa-laptop"></i> Electronics</a>
+                <a href="#"><i class="fas fa-furniture"></i> Furniture</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========== MAIN ========== -->
+    <main class="container">
+
+        <!-- Hero Banner -->
+        <section class="hero">
+            <div>
+                <h1>Malaysia's Largest Marketplace</h1>
+                <p>Buy, sell, or find almost anything — it's easy!</p>
+            </div>
+            <a href="#" class="btn-hero"><i class="fas fa-plus-circle"></i> Start Selling</a>
+        </section>
+
+        <!-- Trending Now -->
+        <div class="section-title">
+            <h2>🔥 Trending Now</h2>
+            <a href="#">View All →</a>
+        </div>
+
+        <div class="product-grid" id="trendingGrid">
+            <!-- Products will be injected by JavaScript -->
+        </div>
+
+        <!-- Popular Searches -->
+        <div class="section-title" style="margin-top:40px;">
+            <h2>📈 Popular Searches</h2>
+        </div>
+        <div class="popular-tags">
+            <a href="#">Toyota Vios</a>
+            <a href="#">Honda City</a>
+            <a href="#">Perodua Axia</a>
+            <a href="#">Mercedes Benz</a>
+            <a href="#">BMW</a>
+            <a href="#">Landed Property</a>
+            <a href="#">Condominium</a>
+            <a href="#">iPhone</a>
+            <a href="#">Samsung</a>
+            <a href="#">Motorcycles</a>
+            <a href="#">Pet Adoption</a>
+            <a href="#">Laptops</a>
+        </div>
+
+        <!-- Browse Categories -->
+        <div class="section-title">
+            <h2>📂 Browse Categories</h2>
+        </div>
+        <div class="category-grid">
+            <div class="category-item">
+                <i class="fas fa-car"></i>
+                <span>Cars</span>
+                <small>12,340 listings</small>
+            </div>
+            <div class="category-item">
+                <i class="fas fa-home"></i>
+                <span>Property</span>
+                <small>8,201 listings</small>
+            </div>
+            <div class="category-item">
+                <i class="fas fa-mobile-alt"></i>
+                <span>Phones</span>
+                <small>4,567 listings</small>
+            </div>
+            <div class="category-item">
+                <i class="fas fa-motorcycle"></i>
+                <span>Motorcycles</span>
+                <small>2,890 listings</small>
+            </div>
+            <div class="category-item">
+                <i class="fas fa-paw"></i>
+                <span>Pets</span>
+                <small>1,234 listings</small>
+            </div>
+            <div class="category-item">
+                <i class="fas fa-briefcase"></i>
+                <span>Jobs</span>
+                <small>3,456 listings</small>
+            </div>
+            <div class="category-item">
+                <i class="fas fa-laptop"></i>
+                <span>Electronics</span>
+                <small>5,678 listings</small>
+            </div>
+            <div class="category-item">
+                <i class="fas fa-tshirt"></i>
+                <span>Fashion</span>
+                <small>2,345 listings</small>
+            </div>
+        </div>
+
+        <!-- More Listings -->
+        <div class="section-title">
+            <h2>🏠 Properties for Sale</h2>
+            <a href="#">View All →</a>
+        </div>
+        <div class="product-grid" id="propertyGrid">
+            <!-- Injected by JS -->
+        </div>
+
+        <div class="section-title">
+            <h2>📱 Electronics & Gadgets</h2>
+            <a href="#">View All →</a>
+        </div>
+        <div class="product-grid" id="electronicsGrid">
+            <!-- Injected by JS -->
+        </div>
+
+    </main>
+
+    <!-- ========== CHATBOT ========== -->
+    <div class="chat-widget" id="chatWidget">
+        <div class="chat-header">
+            <div class="chat-header-left">
+                <i class="fas fa-robot"></i>
+                <span>MarketBot</span>
+            </div>
+            <button type="button" id="chatClose" aria-label="Close chat">×</button>
+        </div>
+        <div class="chat-body" id="chatBody">
+            <div class="message bot">Hi! I'm MarketBot. I can help you with cars, property, electronics, and listings.</div>
+        </div>
+        <form class="chat-input-row" id="chatForm">
+            <input id="chatInput" type="text" placeholder="Type your message..." aria-label="Type your message" />
+            <button type="submit" aria-label="Send message"><i class="fas fa-paper-plane"></i></button>
+        </form>
+    </div>
+
+    <button class="chat-toggle" id="chatToggle" aria-label="Open chat">
+        <i class="fas fa-comments"></i>
+    </button>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4>MarketHub</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Buy</h4>
+                    <ul>
+                        <li><a href="#">Cars</a></li>
+                        <li><a href="#">Property</a></li>
+                        <li><a href="#">Electronics</a></li>
+                        <li><a href="#">Fashion</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Sell</h4>
+                    <ul>
+                        <li><a href="#">List an Item</a></li>
+                        <li><a href="#">Sell a Car</a></li>
+                        <li><a href="#">Sell Property</a></li>
+                        <li><a href="#">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Centre</a></li>
+                        <li><a href="#">Safety Tips</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2026 MarketHub. All rights reserved. Made with <i class="fas fa-heart" style="color:#e63946;"></i> in Malaysia.
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== JAVASCRIPT ========== -->
+    <script>
+        // ===== PRODUCT DATA (inspired by Mudah.my) =====
+        const trendingProducts = [
+            { title: 'Toyota Vios J', price: 'RM 27,800', location: 'Gelang Patah, JHR', year: '2014', icon: 'fa-car' },
+            { title: 'BMW X1 sDRIVE20i M SPORT', price: 'RM 102,800', location: 'Perai, PNG', year: '2021',
+            icon: 'fa-car' },
+            { title: 'Ferrari F12 BERLINETTA', price: 'RM 988,000', location: 'Petaling Jaya, SGR', year: '2014',
+                icon: 'fa-car' },
+            { title: 'Lexus IS 300 F-SPORT', price: 'RM 252,000', location: 'Others, KUL', year: '2023', icon: 'fa-car' },
+            { title: 'Mercedes Benz E350e AMG', price: 'RM 66,600', location: 'Johor Bahru, JHR', year: '2017',
+                icon: 'fa-car' },
+            { title: 'Honda Odyssey M', price: 'RM 29,888', location: 'Batu Pahat, JHR', year: '2012', icon: 'fa-car' },
+            { title: 'Honda City V', price: 'RM 65,100', location: 'Seri Manjong, PRK', year: '2023', icon: 'fa-car' },
+            { title: 'Toyota Vellfire ZA', price: 'RM 194,000', location: 'Denai Alam, SGR', year: '2022', icon: 'fa-car' },
+        ];
+
+        const propertyProducts = [
+            { title: 'Double Storey House', price: 'RM 450,000', location: 'Shah Alam, SGR', beds: '4 beds',
+            icon: 'fa-home' },
+            { title: 'Condominium Suite', price: 'RM 380,000', location: 'KLCC, KUL', beds: '3 beds', icon: 'fa-building' },
+            { title: 'Landed Property', price: 'RM 620,000', location: 'Petaling Jaya, SGR', beds: '5 beds',
+            icon: 'fa-home' },
+            { title: 'Studio Unit', price: 'RM 250,000', location: 'Bangsar, KUL', beds: '1 bed', icon: 'fa-building' },
+            { title: 'Bungalow Lot', price: 'RM 1,200,000', location: 'Damansara, SGR', beds: '6 beds', icon: 'fa-home' },
+        ];
+
+        const electronicsProducts = [
+            { title: 'iPhone 15 Pro Max', price: 'RM 4,899', location: 'KL', condition: 'New', icon: 'fa-mobile-alt' },
+            { title: 'Samsung Galaxy S24', price: 'RM 3,799', location: 'Penang', condition: 'New', icon: 'fa-mobile-alt' },
+            { title: 'MacBook Pro M3', price: 'RM 6,999', location: 'Selangor', condition: 'Used', icon: 'fa-laptop' },
+            { title: 'iPad Air 5th Gen', price: 'RM 2,499', location: 'JB', condition: 'New', icon: 'fa-tablet-alt' },
+            { title: 'Sony WH-1000XM5', price: 'RM 1,299', location: 'KL', condition: 'Like New', icon: 'fa-headphones' },
+        ];
+
+        // ===== RENDER FUNCTION =====
+        function renderProducts(containerId, products, type = 'default') {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            container.innerHTML = products.map(p => {
+                let metaHtml = '';
+                if (type === 'property') {
+                    metaHtml = `<span><i class="fas fa-bed"></i> ${p.beds || '3 beds'}</span>`;
+                } else if (type === 'electronics') {
+                    metaHtml = `<span><i class="fas fa-tag"></i> ${p.condition || 'New'}</span>`;
+                } else {
+                    metaHtml = `
+                                <span><i class="far fa-calendar-alt"></i> ${p.year || '2023'}</span>
+                                <span><i class="fas fa-map-marker-alt"></i> ${p.location}</span>
+                            `;
+                }
+
+                return `
+                            <div class="product-card">
+                                <div class="img-placeholder">
+                                    <i class="fas ${p.icon || 'fa-box'}"></i>
+                                </div>
+                                <div class="info">
+                                    <div class="price">${p.price}</div>
+                                    <div class="title">${p.title}</div>
+                                    <div class="meta">
+                                        ${metaHtml}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+            }).join('');
+        }
+
+        // ===== INIT =====
+        renderProducts('trendingGrid', trendingProducts, 'default');
+        renderProducts('propertyGrid', propertyProducts, 'property');
+        renderProducts('electronicsGrid', electronicsProducts, 'electronics');
+
+        // ===== SIMPLE SEARCH ALERT =====
+        document.querySelector('.search-bar button').addEventListener('click', function(e) {
+            e.preventDefault();
+            const input = document.querySelector('.search-bar input');
+            if (input.value.trim().length > 0) {
+                alert(`🔍 You searched for: "${input.value.trim()}"\n(Search functionality would show results here.)`);
+            } else {
+                alert('Please enter a search term.');
+            }
+        });
+
+        // ===== SELL BUTTON ALERT =====
+        document.querySelector('.btn-sell').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('🚀 Start selling on MarketHub!\n(Clicking this would open the listing form.)');
+        });
+
+        // ===== CHATBOT LOGIC =====
+        const chatWidget = document.getElementById('chatWidget');
+        const chatToggle = document.getElementById('chatToggle');
+        const chatClose = document.getElementById('chatClose');
+        const chatForm = document.getElementById('chatForm');
+        const chatInput = document.getElementById('chatInput');
+        const chatBody = document.getElementById('chatBody');
+
+        function addMessage(role, text) {
+            const message = document.createElement('div');
+            message.className = `message ${role}`;
+            message.textContent = text;
+            chatBody.appendChild(message);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function openChat() {
+            chatWidget.classList.remove('hidden');
+            chatToggle.style.opacity = '0';
+            chatToggle.style.pointerEvents = 'none';
+            chatInput.focus();
+        }
+
+        function closeChat() {
+            chatWidget.classList.add('hidden');
+            chatToggle.style.opacity = '1';
+            chatToggle.style.pointerEvents = 'auto';
+        }
+
+        async function sendMessageToDeepSeek(message) {
+            try {
+                const response = await fetch('/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+                    throw new Error(errorData.reply || errorData.error || 'Failed to get a reply from the chatbot.');
+                }
+
+                const data = await response.json();
+                const reply = data?.reply || data?.choices?.[0]?.message?.content || 'Sorry, I could not generate a response.';
+                return reply.trim();
+            } catch (error) {
+                throw new Error(
+                    error.message || 'The chatbot is unavailable. Start the local server and configure the DeepSeek API key.'
+                );
+            }
+        }
+
+        chatToggle.addEventListener('click', openChat);
+        chatClose.addEventListener('click', closeChat);
+
+        chatForm.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const userMessage = chatInput.value.trim();
+
+            if (!userMessage) return;
+
+            addMessage('user', userMessage);
+            chatInput.value = '';
+            addMessage('bot', 'Thinking...');
+
+            try {
+                const reply = await sendMessageToDeepSeek(userMessage);
+                const lastBotMessage = chatBody.querySelectorAll('.message.bot');
+                const finalMessage = lastBotMessage[lastBotMessage.length - 1];
+                if (finalMessage) {
+                    finalMessage.textContent = reply;
+                }
+            } catch (error) {
+                const lastBotMessage = chatBody.querySelectorAll('.message.bot');
+                const finalMessage = lastBotMessage[lastBotMessage.length - 1];
+                if (finalMessage) {
+                    finalMessage.textContent = error.message || 'Something went wrong.';
+                }
+            }
+        });
+
+        console.log('✅ MarketHub loaded successfully!');
+    </script>
+
+</body>
+</html>
