@@ -80,8 +80,35 @@ function escapeHtml(value) {
   return String(value).replace(/[&<>'"]/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[character]));
 }
 
-function renderCategoryCards(items, icon, premium = false) {
-  return items.map(([title, price, location, meta], index) => `<a class="listing-card" href="/listing/${encodeURIComponent(title)}"><div class="listing-image"><i class="fas ${icon}"></i></div><div class="listing-info">${premium || index === 0 ? '<span class="premium-label">Premium ad</span>' : ''}<h3>${escapeHtml(title)}</h3><div class="listing-price">${escapeHtml(price)}</div><div class="listing-meta"><span>${escapeHtml(meta)}</span><span>${escapeHtml(location)}</span></div></div></a>`).join('');
+const sharedHeader = `<header class="site-header"><div class="site-header-top"><a href="/" class="brand">Market<span>Hub</span></a><div class="header-search"><input type="text" placeholder="Search for cars, homes, fashion, jobs..." aria-label="Search marketplace" /><button type="button" aria-label="Search"><i class="fas fa-search"></i></button></div><div class="header-actions"><a href="/get-app" class="header-action"><i class="fas fa-mobile-screen-button"></i><span>Get App</span></a><a href="/profile" class="header-action"><i class="far fa-user-circle"></i><span>Profile</span></a><a href="/messages" class="header-action"><i class="far fa-comment-dots"></i><span>Messages</span></a><a href="/favourites" class="header-action"><i class="far fa-heart"></i><span>Favourites</span></a><a href="/alerts" class="header-action"><i class="far fa-bell"></i><span>Alerts</span></a><a href="/sell" class="header-action btn-cta"><i class="fas fa-plus-circle"></i><span>Sell</span></a></div></div><nav class="category-strip" aria-label="Marketplace categories"><a href="/cars"><i class="fas fa-car"></i>Cars</a><a href="/category/houses-for-sale"><i class="fas fa-home"></i>Houses for Sale</a><a href="/category/apt-for-rent"><i class="fas fa-building"></i>Apt for Rent</a><a href="/category/motorcycles"><i class="fas fa-motorcycle"></i>Motorcycles</a><a href="/category/mobile-phones"><i class="fas fa-mobile-alt"></i>Mobile Phones</a><a href="/category/pets"><i class="fas fa-paw"></i>Pets</a><a href="/category/jobs"><i class="fas fa-briefcase"></i>Jobs</a><a href="/category/fashion"><i class="fas fa-shirt"></i>Fashion</a><a href="/category/electronics"><i class="fas fa-laptop"></i>Electronics</a><a href="/category/furniture"><i class="fas fa-couch"></i>Furniture</a></nav></header>`;
+
+function renderPageWithHeader(file) {
+  const template = require('fs').readFileSync(path.join(__dirname, 'pages', file), 'utf8');
+  return template.includes('<header class="site-header">') ? template : template.replace('<body>', `<body>${sharedHeader}`);
+}
+
+const categoryImages = {
+  'fa-car': ['https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=80', 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=80', 'https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=900&q=80'],
+  'fa-house': ['https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80', 'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=900&q=80'],
+  'fa-building': ['https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=80', 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=80'],
+  'fa-motorcycle': ['https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=900&q=80', 'https://images.unsplash.com/photo-1558981285-6f0c94958bb6?auto=format&fit=crop&w=900&q=80'],
+  'fa-mobile-screen-button': ['https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=900&q=80', 'https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?auto=format&fit=crop&w=900&q=80'],
+  'fa-paw': ['https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=900&q=80', 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=900&q=80'],
+  'fa-briefcase': ['https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80', 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=80'],
+  'fa-shirt': ['https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=900&q=80', 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=900&q=80'],
+  'fa-laptop': ['https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=900&q=80', 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=900&q=80'],
+  'fa-couch': ['https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=900&q=80', 'https://images.unsplash.com/photo-1550226891-ef816aed4a98?auto=format&fit=crop&w=900&q=80']
+};
+
+function renderCategoryCards(items, icon, premium = false, desiredLength = 12) {
+  const itemsToRender = [...items];
+  while (itemsToRender.length < desiredLength) {
+    const nextItem = items[itemsToRender.length % items.length];
+    itemsToRender.push(nextItem);
+  }
+
+  const images = categoryImages[icon] || categoryImages['fa-car'];
+  return itemsToRender.slice(0, desiredLength).map(([title, price, location, meta], index) => `<a class="listing-card" href="/listing/${encodeURIComponent(title)}"><div class="listing-image"><img src="${images[index % images.length]}" alt="${escapeHtml(title)}" loading="lazy" /></div><div class="listing-info">${premium || index < 4 ? '<span class="premium-label">Premium ad</span>' : ''}<h3>${escapeHtml(title)}</h3><div class="listing-price">${escapeHtml(price)}</div><div class="listing-meta"><span>${escapeHtml(meta)}</span><span>${escapeHtml(location)}</span></div></div></a>`).join('');
 }
 
 function renderCategoryLinks(items) {
@@ -97,10 +124,10 @@ function renderCategoryPage(category) {
     .replaceAll('{{SEARCH_PLACEHOLDER}}', escapeHtml(category.search))
     .replace('{{TYPE_LABEL}}', escapeHtml(category.type))
     .replace('{{LISTING_TITLE}}', escapeHtml(category.listing))
-    .replace('{{TRENDING}}', renderCategoryCards(category.items, category.icon, true))
+    .replace('{{TRENDING}}', renderCategoryCards(category.items, category.icon, true, 8))
     .replace('{{POPULAR}}', renderCategoryLinks(category.popular))
     .replace('{{TYPES}}', renderCategoryLinks(category.types))
-    .replace('{{LISTINGS}}', renderCategoryCards(category.items, category.icon))
+    .replace('{{LISTINGS}}', renderCategoryCards(category.items, category.icon, false, 16))
     .replace('{{MORE}}', renderCategoryLinks(category.more));
 }
 
@@ -109,11 +136,11 @@ Object.entries(categoryData).forEach(([slug, category]) => {
 });
 
 Object.entries(pageRoutes).forEach(([route, file]) => {
-  app.get(route, (req, res) => res.sendFile(path.join(__dirname, 'pages', file)));
+  app.get(route, (req, res) => res.send(renderPageWithHeader(file)));
 });
 
 app.get('/listing/:id', (req, res) => {
-  res.sendFile(path.join(__dirname, 'pages', 'listing.html'));
+  res.send(renderPageWithHeader('listing.html'));
 });
 
 app.get('/news', async (req, res) => {

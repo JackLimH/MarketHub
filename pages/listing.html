@@ -1,1 +1,116 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Listing | MarketHub</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"><link rel="stylesheet" href="/pages/site-pages.css"></head><body><main class="page-shell"><nav class="topbar"><a class="brand" href="/">Market<span>Hub</span></a><a class="back-link" href="/">← Marketplace</a></nav><section class="hero"><span class="eyebrow">Featured listing</span><h1>Modern family home in Kuala Lumpur.</h1><p class="lede">A bright, well-connected home with flexible living space and room for the whole family.</p><a class="action" href="/messages">Contact seller</a></section><section class="grid"><article class="card"><h2>RM 780,000</h2><p>4 bedrooms · 3 bathrooms · Kuala Lumpur</p></article><article class="card"><h2>Listing details</h2><p>Verified location, clear photos, seller information, and enquiry history will appear here.</p></article><article class="card"><h2>Save listing</h2><p>Log in to add this property to your Favourites and receive updates.</p><a class="link" href="/favourites">Open favourites →</a></article></section></main></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Car Listing | MarketHub</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+	<link rel="stylesheet" href="/pages/site-pages.css" />
+</head>
+<body>
+	<header class="site-header">
+		<div class="site-header-top">
+			<a href="/" class="brand">Market<span>Hub</span></a>
+			<div class="header-search">
+				<input type="text" placeholder="Search for cars, homes, fashion, jobs..." aria-label="Search marketplace" />
+				<button type="button" aria-label="Search"><i class="fas fa-search"></i></button>
+			</div>
+			<div class="header-actions">
+				<a href="/get-app" class="header-action"><i class="fas fa-mobile-screen-button"></i><span>Get App</span></a>
+				<a href="/profile" class="header-action"><i class="far fa-user-circle"></i><span>Profile</span></a>
+				<a href="/messages" class="header-action"><i class="far fa-comment-dots"></i><span>Messages</span></a>
+				<a href="/favourites" class="header-action"><i class="far fa-heart"></i><span>Favourites</span></a>
+				<a href="/sell" class="header-action btn-cta"><i class="fas fa-plus-circle"></i><span>Sell</span></a>
+			</div>
+		</div>
+		<nav class="category-strip" aria-label="Marketplace categories">
+			<a href="/cars"><i class="fas fa-car"></i>Cars</a>
+			<a href="/category/houses-for-sale"><i class="fas fa-home"></i>Houses for Sale</a>
+			<a href="/category/apt-for-rent"><i class="fas fa-building"></i>Apt for Rent</a>
+			<a href="/category/motorcycles"><i class="fas fa-motorcycle"></i>Motorcycles</a>
+			<a href="/category/mobile-phones"><i class="fas fa-mobile-alt"></i>Mobile Phones</a>
+			<a href="/category/pets"><i class="fas fa-paw"></i>Pets</a>
+			<a href="/category/jobs"><i class="fas fa-briefcase"></i>Jobs</a>
+			<a href="/category/fashion"><i class="fas fa-shirt"></i>Fashion</a>
+			<a href="/category/electronics"><i class="fas fa-laptop"></i>Electronics</a>
+			<a href="/category/furniture"><i class="fas fa-couch"></i>Furniture</a>
+		</nav>
+	</header>
+	<main class="page-shell listing-detail">
+		<nav class="topbar"><a class="back-link" href="/cars">← Back to Cars</a></nav>
+		<header class="listing-detail-header">
+			<div><span class="listing-detail-kicker">Premium vehicle listing</span><h1 id="listingTitle">Toyota Camry 2.5V</h1></div>
+			<a class="action" href="/messages">Contact seller</a>
+		</header>
+
+		<section class="listing-gallery" aria-label="Vehicle photo gallery">
+			<div class="listing-gallery-main">
+				<img id="mainPhoto" alt="Vehicle three-quarter front view" />
+				<div class="listing-price-overlay"><small id="monthlyPrice">RM 503 / mo</small><strong id="totalPrice">RM 138,800</strong></div>
+			</div>
+			<div class="listing-thumbs" id="thumbnailList"></div>
+		</section>
+		<div class="listing-detail-actions"><button class="registration-button" type="button" id="registrationButton">View Registration Card</button></div>
+
+		<section class="listing-detail-meta">
+			<article class="card"><h2 id="listingMeta">2022 · 32,000 km · Kuala Lumpur</h2><p>Verified vehicle details, clear photos, and seller information are available for this listing.</p></article>
+			<article class="card"><h2>Studio presentation</h2><p>Photographed in a bright indoor showroom with consistent three-quarter front framing.</p></article>
+			<article class="card"><h2>Save listing</h2><p>Log in to add this vehicle to your Favourites and receive updates.</p><a class="link" href="/favourites">Open favourites →</a></article>
+		</section>
+	</main>
+	<script>
+		const baseImages = [
+			'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=85',
+			'https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=900&q=80',
+			'https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=900&q=80',
+			'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=900&q=80',
+			'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=80'
+		];
+		const listings = {
+			'toyota-camry': { title: 'Toyota Camry 2.5V', price: 'RM 138,800', monthly: 'RM 503 / mo', meta: '2022 · 32,000 km · Kuala Lumpur' },
+			'bmw-x5': { title: 'BMW X5 xDrive40i', price: 'RM 398,000', monthly: 'RM 1,442 / mo', meta: '2021 · 41,000 km · Selangor' },
+			'mercedes-c-class': { title: 'Mercedes-Benz C200', price: 'RM 245,000', monthly: 'RM 888 / mo', meta: '2023 · 18,000 km · Penang' },
+			'volvo-xc60': { title: 'Volvo XC60 Recharge', price: 'RM 288,800', monthly: 'RM 1,047 / mo', meta: '2022 · 26,000 km · Johor Bahru' },
+			'perodua-myvi': { title: 'Perodua Myvi 1.5 AV', price: 'RM 58,800', monthly: 'RM 213 / mo', meta: '2021 · 45,000 km · Shah Alam' },
+			'honda-city': { title: 'Honda City V-Sensing', price: 'RM 79,900', monthly: 'RM 290 / mo', meta: '2022 · 29,000 km · Ipoh' },
+			'proton-x50': { title: 'Proton X50 Flagship', price: 'RM 91,800', monthly: 'RM 333 / mo', meta: '2023 · 21,000 km · Melaka' },
+			'audi-a4': { title: 'Audi A4 S line', price: 'RM 158,000', monthly: 'RM 573 / mo', meta: '2020 · 38,000 km · Petaling Jaya' },
+			'toyota-vios-j': { title: 'Toyota Vios J', price: 'RM 27,800', monthly: 'RM 101 / mo', meta: '2014 · Gelang Patah, JHR' },
+			'bmw-x1-sdrive20i-m-sport': { title: 'BMW X1 sDRIVE20i M SPORT', price: 'RM 102,800', monthly: 'RM 373 / mo', meta: '2021 · Perai, PNG' },
+			'ferrari-f12-berlinetta': { title: 'Ferrari F12 BERLINETTA', price: 'RM 988,000', monthly: 'RM 3,580 / mo', meta: '2014 · Petaling Jaya, SGR' },
+			'lexus-is-300-f-sport': { title: 'Lexus IS 300 F-SPORT', price: 'RM 252,000', monthly: 'RM 913 / mo', meta: '2023 · Others, KUL' },
+			'mercedes-benz-e350e-amg': { title: 'Mercedes Benz E350e AMG', price: 'RM 66,600', monthly: 'RM 241 / mo', meta: '2017 · Johor Bahru, JHR' },
+			'honda-odyssey-m': { title: 'Honda Odyssey M', price: 'RM 29,888', monthly: 'RM 108 / mo', meta: '2012 · Batu Pahat, JHR' },
+			'honda-city-v': { title: 'Honda City V', price: 'RM 65,100', monthly: 'RM 236 / mo', meta: '2023 · Seri Manjong, PRK' },
+			'toyota-vellfire-za': { title: 'Toyota Vellfire ZA', price: 'RM 194,000', monthly: 'RM 703 / mo', meta: '2022 · Denai Alam, SGR' }
+		};
+		const key = decodeURIComponent(location.pathname.split('/').pop()).toLowerCase();
+		const listing = listings[key] || listings['toyota-camry'];
+		const imageOffsets = { 'toyota-camry': 0, 'bmw-x5': 1, 'mercedes-c-class': 2, 'volvo-xc60': 3, 'perodua-myvi': 1, 'honda-city': 2, 'proton-x50': 3, 'audi-a4': 0 };
+		const offset = imageOffsets[key] || 0;
+		const galleryImages = baseImages.map((source, index) => baseImages[(index + offset) % baseImages.length]);
+		document.title = `${listing.title} | MarketHub`;
+		document.getElementById('listingTitle').textContent = listing.title;
+		document.getElementById('totalPrice').textContent = listing.price;
+		document.getElementById('monthlyPrice').textContent = listing.monthly;
+		document.getElementById('listingMeta').textContent = listing.meta;
+		const mainPhoto = document.getElementById('mainPhoto');
+		const thumbnailList = document.getElementById('thumbnailList');
+		mainPhoto.src = galleryImages[0];
+		galleryImages.slice(1).forEach((source, index) => {
+			const button = document.createElement('button');
+			button.className = 'listing-thumb';
+			button.type = 'button';
+			button.setAttribute('aria-label', `View vehicle angle ${index + 2}`);
+			const image = document.createElement('img');
+			image.src = source;
+			image.alt = `${listing.title} view ${index + 2}`;
+			image.loading = 'lazy';
+			button.appendChild(image);
+			button.addEventListener('click', () => { mainPhoto.src = source; document.querySelectorAll('.listing-thumb').forEach(item => item.classList.remove('active')); button.classList.add('active'); });
+			thumbnailList.appendChild(button);
+		});
+		document.getElementById('registrationButton').addEventListener('click', () => alert(`Registration card for ${listing.title} will be connected to verified vehicle records in the next phase.`));
+	</script>
+</body>
+</html>
